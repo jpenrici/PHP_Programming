@@ -1,0 +1,1 @@
+This content is intended to help beginners.
