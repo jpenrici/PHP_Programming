@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Training</title>
+</head>
+
+<body>
+    <h1>Workspace</h1>
+
+    <pre>
+        The HTML &lt;canvas&gt; element is used to draw graphics dynamically, via JavaScript.
+        Canvas has several methods for drawing paths, boxes, circles, text, and adding images.
+        Canvas is great for playing with JavaScript and Logic!
+            
+        Canvas is compatible with all major browsers.      
+    </pre>
+
+    <!-- HTML Canvas Graphics -->
+    <canvas id="drawingArea" width="600" height="400" style="border: 1px solid; background-color: rgb(144, 196, 144);">
+        Here anything can happen!
+    </canvas>
+
+    <!-- JavaScript -->
+    <script>
+        // Arc Configuration
+        var x = 300;
+        var y = 200;
+        var radius = 50;
+        var startAngle = 0;
+        var endAngle = 360;
+        // Canvas
+        var drawingArea = document.getElementById("drawingArea");
+        var ctx = drawingArea.getContext("2d");
+        // Draw
+        ctx.beginPath();
+        ctx.arc(x, y, radius, startAngle, endAngle);
+        ctx.stroke();
+    </script>
+
+</body>
+
+</html>

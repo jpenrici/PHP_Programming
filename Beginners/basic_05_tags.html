@@ -7,28 +7,38 @@
 
 <body>
   <!-- Form - User Inputs -->
+  <h2>Form and Inputs</h2>
   <form>
-    <label for="field1">Field 1:</label>
-    <input type="text" id="field1" name="field1">
+    <!-- The for attribute of <label> must be equal to the id attribute of the related element to bind them together. -->
+    <label for="element_id_1">Field 1:</label>
+    <!-- Always use the <label> tag to define labels where the <input> tag has the type "text", "checkbox", "radio", "file" and "password".
+         The name attribute is used to reference elements in a JavaScript, or to reference form data after a form is submitted. -->
+    <input type="text" id="element_id_1" name="field_1">
     <br>
-    <label for="field2">Field 2:</label>
-    <input type="password" name="field2" id="field2" placeholder="Enter password">
-    <br>
+    <label for="element_id_2">Field 2:</label>
+    <input type="password" id="element_id_2" name="field_2" placeholder="Enter password">
+    <br><br>
     <input type="submit" value="Submit">
   </form>
   <hr>
-  <form>
+
+  <!-- Other entries -->
+  <div>
     <input type="radio" id="radio1" name="termns" value="ok">
     <label for="html">Radio button ...</label>
     <br>
     <input type="checkbox" id="check1" name="check1" value="check_01">
     <label for="check1">Checkboxes ...</label>
-    <br>
-  </form>
+    <br><br>
+    <input type="button" value="Cancel">
+    <input type="button" value="Confirm">
+  </div>
   <hr>
 
   <!-- Button -->
-  <Button>Button</Button>
+  <Button type="button">Button</Button> <!-- The button is a clickable button. -->
+  <Button type="reset">Reset</Button>   <!-- The button is a submit button (submits form-data). -->
+  <Button type="submit">Submit</Button> <!-- The button is a reset button (resets the form-data to its initial values). -->
 
 </body>
 
