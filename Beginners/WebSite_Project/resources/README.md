@@ -1,0 +1,1 @@
+Folder with the main PHP, HTML, CSS, JS, Images resources in common use.

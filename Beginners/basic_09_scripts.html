@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+</head>
+
+<body>
+    <!-- Comparison between the functioning of Canvas and SVG in HTML with Javascript. -->
+
+    <p>Controlling <b>Images with Javascript</b>. The left using <b>HTML Canvas</b> and the right <b>SVG</b>.</p>
+
+    <div style="float: left;">
+        <!-- HTML Canvas Graphics -->
+        <canvas id="drawingArea1" width="600" height="400"
+            style="border: 1px solid; background-color: rgb(144, 196, 144);">
+            Here anything can happen!
+        </canvas>
+        <div>
+            <input type="button" value="Up" onclick="move1(0, -1)" />
+            <input type="button" value="Down" onclick="move1(0, 1)" />
+            <input type="button" value="Left" onclick="move1(-1, 0)" />
+            <input type="button" value="Right" onclick="move1(1, 0)" />
+        </div>
+        <div>
+            <label for="speedRange1">Speed:</label>
+            <input type="range" id="speedRange1" name="speedRange1" min="1" max="100" value="5" step="1" />
+        </div>
+    </div>
+
+    <div>
+        <!-- SGV Image -->
+        <svg id="drawingArea2" width="600" height="400"
+            style="border: 1px solid; background-color: rgb(144, 196, 144);">
+            <circle id="shape" cx="300" cy="200" r="50" stroke="blue" stroke-width="2" fill="#A0A0FF" />
+        </svg>
+        <br>
+        <div>
+            <input type="button" value="Up" onclick="move2(0, -1)" />
+            <input type="button" value="Down" onclick="move2(0, 1)" />
+            <input type="button" value="Left" onclick="move2(-1, 0)" />
+            <input type="button" value="Right" onclick="move2(1, 0)" />
+        </div>
+        <div>
+            <label for="speedRange2">Speed:</label>
+            <input type="range" id="speedRange2" name="speedRange2" min="1" max="100" value="5" step="1" />
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+
+    <!-- Canvas -->
+    <script>
+        // Arc Configuration
+        var x = 300;
+        var y = 200;
+        var radius = 50;
+        var startAngle = 0;
+        var endAngle = 360;
+        // Canvas
+        var drawingArea = document.getElementById("drawingArea1");
+        var ctx = drawingArea.getContext("2d");
+        // Slider
+        var slider = document.getElementById('speedRange1');
+        var speed = slider.value;
+        slider.oninput = function () {
+            speed = this.value;
+        }
+        // Init
+        move1();
+        // Draw
+        function move1(dx = 0, dy = 0) {
+            x += dx * speed;
+            y += dy * speed;
+            ctx.reset();
+            ctx.beginPath();
+            ctx.arc(x, y, radius, startAngle, endAngle);
+            ctx.stroke();
+        }
+    </script>
+
+    <!-- SVG -->
+    <script>
+        var slider = document.getElementById('speedRange2');
+        var speed = slider.value;
+        slider.oninput = function () {
+            speed = this.value;
+        }
+
+        var shape = document.getElementById("shape");
+        function move2(dx, dy) {
+            shape.setAttribute("cx", parseFloat(shape.getAttribute("cx")) + dx * speed);
+            shape.setAttribute("cy", parseFloat(shape.getAttribute("cy")) + dy * speed);
+        }
+    </script>
+
+</body>
+
+</html>
