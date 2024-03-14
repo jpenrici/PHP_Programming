@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javasript</title>
+</head>
+
+<body>
+    <h2>JS : Workspace</h2>
+    <hr>
+
+    <div>
+        <b>Value: </b><input type="text" id="myValue" value="0">
+        <p id="result">Enter the value and click the button to calculate.</p>
+    </div>
+    <div>
+        <button onclick="calculate('sqrt')">&radic;</button>
+        <button onclick="calculate('sq')">n&sup2;</button>
+    </div>
+    <br>
+    <div>
+        <button onclick="temperature('C')">To Celsius</button>
+        <button onclick="temperature('F')">To Fahrenheit</button>
+    </div>
+
+    <!-- Javasript -->
+    <script>
+        var element = document.getElementById("myValue");
+
+        function calculate(option) {
+            let value = element.value;
+            let result = "";
+            if (option == "sqrt") {
+                result += "&radic;" + value + " = " + Math.sqrt(value);
+            }
+            if (option == "sq") {
+                result += value + "&sup2;" + " = " + Math.pow(value, 2);
+            }
+            document.getElementById("result").innerHTML = result;
+
+        }
+
+        function toCelsius(fahrenheit) {
+            return (5 / 9) * (fahrenheit - 32);
+        }
+
+        function toFahrenheit(celsius) {
+            return (celsius * 9 / 5) + 32;
+        }
+
+        function temperature(option) {
+            let value = element.value;
+            let result = "";
+            switch (option) {
+                case 'C':
+                    result = value + " °F = " + toCelsius(value) + " &deg;C";
+                    break;
+                case 'F':
+                    result = value + " °C = " + toFahrenheit(value) + " &deg;F";
+                    break;
+                default:
+                    break;
+            }
+            document.getElementById("result").innerHTML = result;
+        }
+
+    </script>
+
+</body>
+
+</html>

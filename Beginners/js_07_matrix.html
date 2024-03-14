@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javasript</title>
+
+    <!-- CSS -->
+    <style>
+        h1,
+        h3 {
+            text-align: center;
+            color: rgb(129, 28, 28);
+        }
+
+        td {
+            width: 50px;
+            height: 50px;
+        }
+
+        table {
+            margin: 5px auto;
+        }
+
+        .vertical {
+            border-left: 2px solid gray;
+            border-right: 2px solid gray;
+        }
+
+        .horizontal {
+            border-top: 2px solid gray;
+            border-bottom: 2px solid gray;
+        }
+
+        button {
+            width: 50px;
+            height: 50px;
+            background-color: rgb(220, 220, 180);
+            border: none;
+        }
+
+        button:hover {
+            background-color: rgb(194, 194, 169);
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>JS : Workspace</h2>
+    <hr>
+
+    <h1>Tic Tac Toe</h1>
+    <h3 id="player">Waiting for Player 1!</h3>
+    <table>
+        <tr>
+            <td>
+                <button id="cell01" onclick="play('1')"></button>
+            </td>
+            <td class="vertical">
+                <button id="cell02" onclick="play('2')"></button>
+            </td>
+            <td>
+                <button id="cell03" onclick="play('3')"></button>
+            </td>
+        </tr>
+        <tr>
+            <td class="horizontal">
+                <button id="cell04" onclick="play('4')"></button>
+            </td>
+            <td class="vertical horizontal">
+                <button id="cell05" onclick="play('5')"></button>
+            </td>
+            <td class="horizontal">
+                <button id="cell06" onclick="play('6')"></button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="cell07" onclick="play('7')"></button>
+            </td>
+            <td class="vertical">
+                <button id="cell08" onclick="play('8')"></button>
+            </td>
+            <td>
+                <button id="cell09" onclick="play('9')"></button>
+            </td>
+        </tr>
+    </table>
+    <h3 id="info"></h3>
+
+    <script>
+        // Data
+        var cell = new Array(10);
+        var gameover = false;
+        var winner = false;
+        cell.fill(0);
+
+        // Gameplay
+        function play(num) {
+            if (!gameover) {
+                if (cell[num] > 0) {
+                    window.alert("Cell filled! Try again!");
+                } else {
+                    update(num);
+                }
+            }
+        }
+
+        function update(num) {
+            // Table
+            document.getElementById("cell0" + num).style.backgroundColor = (cell[0] % 2 == 0 ? 'green' : 'yellow');
+
+            // Player
+            cell[num] = (cell[0] % 2) + 1;
+
+            // Game
+            cell[0]++;
+            console.log(cell);
+
+            var test = [
+                [1, 2, 3], [4, 5, 6], [7, 8, 9],    // horizontal
+                [1, 4, 7], [2, 5, 8], [3, 6, 9],    // vertical
+                [1, 5, 9], [3, 5, 7]                // diagonal
+            ]
+
+            
+            var player = cell[num];
+            for (let i = 0; i < test.length; i++) {
+                if (player == cell[test[i][0]] && player == cell[test[i][1]] && player == cell[test[i][2]]) {
+                    console.log('winner', player, test[i]);
+                    winner = true;
+                    gameover = true;
+                    break;
+                }
+            }
+
+            if (winner) {
+                document.getElementById("player").innerHTML = "Winner is " + player + "!";
+                document.getElementById("info").innerHTML = "Press F5 to try again!";
+            } else {
+                if (cell[0] == 9) {
+                    document.getElementById("player").innerHTML = "We don't have a winner!";
+                    document.getElementById("info").innerHTML = "Press F5 to try again!";
+                    gameover = true;
+                } else {
+                    document.getElementById("player").innerHTML = "Waiting for Player " + ((player % 2) + 1) + "!";
+                }
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

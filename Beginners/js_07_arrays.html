@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javasript</title>
+</head>
+
+<body>
+    <!-- Open the Developer Tool (Ctrl+Shift+I in the browser) to view the output in the console. -->
+    <b>Use the Developer Tool in the Browser!</b>
+    <hr>
+
+    <script>
+        // Array : Vector
+        let vec = ["value 1 : position 0", "value 2 : position 1", "value 3 : position 2"];
+        console.log(vec);
+        console.log(vec.length);    // 3
+        console.log(vec.at(0));     // value 1 : position 0
+        console.log(vec[0]);        // value 1 : position 0
+        vec.push("new value");
+        console.log(vec.length);    // 4
+        console.log(vec.at(vec.length - 1));    // new value
+        vec.pop();
+        console.log(vec.at(vec.length - 1));    // value 3 : position 2
+
+        // Array : Matrix
+        let matrix = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8]
+        ];
+        console.log(matrix);
+        console.log("Rows:" , matrix.length);           // 3
+        console.log("Columns:" , matrix.at(0).length);  // 3
+        console.log(matrix.at(1).at(2));    // 5
+        console.log(matrix[1][2]);          // 5
+
+        // String
+        var word = "abcdef";
+        console.log(word.length); // 6
+        console.log(word.at(2));  // c
+
+    </script>
+
+</body>
+
+</html>
