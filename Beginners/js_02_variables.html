@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javasript</title>
+</head>
+
+<body>
+    <!-- Open the Developer Tool (Ctrl+Shift+I in the browser) to view the output in the console. -->
+    <b>Use the Developer Tool in the Browser!</b>
+    <hr>
+
+    <script>
+        /*
+            [var|let|const] varName = [value|expression];
+        */
+
+        // Variables
+        let word = "String";    // Block Scope, cannot be Redeclared
+        console.log(word);
+
+        var number = 10.5;      // Global Scope, can be redeclared.
+        console.log(number);
+
+        let status;
+        status = false;
+        console.log(status);
+
+        let x = 10, y = 20, z = 30;
+        console.log(x, y, z, x + y + z);
+
+        var strong; // JS loosely typed
+        strong = false;
+        console.log(strong);
+        strong = "word";
+        console.log(strong);
+
+        var a = 10, b = 20, c = 30;
+        console.log(a, b, c, a * b * c);
+
+        index = 1001; // Automatic declaration. Not recommended!
+        console.log(index);
+
+        const HELP = "Value of a Constant cannot be changed!"; // Block Scope, cannot be Redeclared
+        // HELP = 10;  // Error
+        console.log(HELP);
+
+        let _firstName = "My";
+        let _lastName = "Name";
+        let _fullName = _firstName + " " + _lastName;
+        console.log(_fullName);
+
+        var $variable = "Hello!";
+        console.log($variable);
+
+        var test;   // undefined
+        console.log(test);
+       
+    </script>
+
+</body>
+
+</html>

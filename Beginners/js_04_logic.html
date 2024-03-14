@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javasript</title>
+</head>
+
+<body>
+    <h2>JS : Workspace</h2>
+    <hr>
+
+    <script>
+
+        // example 1
+        let n1 = 10, n2 = 6, n3 = 8;
+        var average = (n1 + n2 + n3) / 3;
+        var result = "Approved!";
+        document.write("N1 = " + n1 + ", N2 = " + n2 + ", N3 = " + n3 + " : ");
+        if (average < 6) {
+            result = "You need to study more!";
+        }
+        document.write("<b>" + result + "</b><br>");
+
+        // example 2
+        var number = 1;
+        result = number % 2;
+        document.write(number + " is ");
+        if (result == 0) {
+            document.write("even number.<br>");
+        } else {
+            document.write("odd number.<br>")
+        }
+
+        // example 3
+        var level = -0.5;
+        var easy = 0;
+        var normal = 30;
+        var hard = 70;
+        var difficulty = "";
+        if (level > hard) {
+            difficulty = "Hard"
+        } else if (level > normal) {
+            difficulty = "Normal";
+        } else if (level > easy) {
+            difficulty = "Easy";
+        } else {
+            difficulty = "Invalid";
+        }
+        document.write("Level " + level + " is " + difficulty + "!<br>");
+
+        // example 4
+        result = 10 + " 20 cm";
+        document.write("10 +  20 cm = " + result + "<br>");
+
+        result = 10 * "20";
+        document.write("10 * 20 = " + result + "<br>");
+
+        result = 10 * "*";  // NaN
+        document.write(result + "<br>");
+
+        // example 5
+        var option = "";
+        switch (option) {
+            case "orange":
+                selected = 1;
+                break;
+            case "apple":
+                selected = 2;
+                break;
+            case "banana":
+                selected = 3;
+                break;
+            default:
+                selected = 0;
+                option = "undefined";
+                break;
+        }
+        document.write("Option " + selected + " (" + option + ")<br>");
+
+        // example 6
+        var button1 = true, button2 = true, button3 = false;
+        document.write("Button 1: " + (button1 ? "clicked" : "stopped") + "<br>");
+        document.write("Button 2: " + (button2 ? "clicked" : "stopped") + "<br>");
+        document.write("Button 3: " + (button3 ? "clicked" : "stopped") + "<br>");
+        document.write("Button 1 and 2: " + (button1 && button2 ? "clicked" : "stopped") + "<br>");
+        document.write("Button 1 and 2 and 3: " + (button1 && button2 && button3 ? "clicked" : "stopped") + "<br>");
+        document.write("Button 1 or 2 or 3: " + (button1 || button2 || button3 ? "clicked" : "stopped") + "<br>");
+        document.write("Button (1 or 2) and 3: " + ((button1 || button2) && button3 ? "clicked" : "stopped") + "<br>");
+        document.write("Button 1 and (2 or 3): " + (button1 && (button2 || button3) ? "clicked" : "stopped") + "<br>");
+
+    </script>
+
+</body>
+
+</html>

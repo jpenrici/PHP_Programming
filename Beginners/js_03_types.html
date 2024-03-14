@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javasript</title>
+</head>
+
+<body>
+    <!-- Open the Developer Tool (Ctrl+Shift+I in the browser) to view the output in the console. -->
+    <b>Use the Developer Tool in the Browser!</b>
+    <hr>
+
+    <script>
+        
+        // Main types
+        console.log(0, typeof (0));         // Number
+        console.log(1.1, typeof (1.1));     // Number
+        console.log('a', typeof ('a'));     // String
+        console.log("A", typeof ("A"));     // String
+        console.log("AAA", typeof ('ABC')); // String
+        console.log(false, typeof(false));  // Boolean
+
+        var enigma;                         // undefined
+        console.log(enigma, typeof(enigma));
+
+        data = [0, 1, 2];
+        console.log(data, typeof (data));   // Object, Array
+
+        data = { id: "007", name: "person", age: "60" };
+        console.log("id:", data.id);
+        console.log(data, typeof (data));   // Object
+        
+        func = function() { return "Hello World!"; };
+        console.log(func(), typeof(func));  // Function
+
+        class Person{ welcome() { return "Hello World!"; } };
+        person = new Person();
+        console.log(person.welcome(), typeof(person));  // Object
+
+    </script>
+
+</body>
+
+</html>

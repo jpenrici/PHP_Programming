@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javasript</title>
+</head>
+
+<body>
+    <h2>JS : Workspace</h2>
+    <hr>
+
+    <script>
+      
+    // Triangle
+      var lines = 5;
+      for (let y = 0; y < lines; y++) {
+        for (let x = 0; x < lines; x++) {
+            document.write('*');
+        }
+        document.write('<br>');
+      }
+
+    // Counter
+    var number = 10;
+    while (number > 0) {
+        number--;
+        var result = number;
+        if (number % 2 == 0) {
+            result = "<b>" + result + "</b>";
+        }
+        document.write(result + " ");
+    }
+    document.write("<br>");
+
+    var number = 10;
+    do {
+        document.writeln("<p>" + number + "</p>");
+        number--;
+    } while (number > 5);
+
+    </script>
+
+</body>
+
+</html>
