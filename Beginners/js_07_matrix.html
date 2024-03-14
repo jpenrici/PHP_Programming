@@ -50,7 +50,7 @@
     <hr>
 
     <h1>Tic Tac Toe</h1>
-    <h3 id="player">Waiting for Player 1!</h3>
+    <h3 id="player">Waiting for Player!</h3>
     <table>
         <tr>
             <td>
@@ -107,11 +107,12 @@
         }
 
         function update(num) {
-            // Table
-            document.getElementById("cell0" + num).style.backgroundColor = (cell[0] % 2 == 0 ? 'green' : 'yellow');
-
             // Player
-            cell[num] = (cell[0] % 2) + 1;
+            var player = (cell[0] % 2) + 1;
+            cell[num] = player;
+
+            // Table
+            document.getElementById("cell0" + num).style.backgroundColor = (player == 1 ? 'green' : 'yellow');
 
             // Game
             cell[0]++;
@@ -123,13 +124,11 @@
                 [1, 5, 9], [3, 5, 7]                // diagonal
             ]
 
-            
-            var player = cell[num];
             for (let i = 0; i < test.length; i++) {
                 if (player == cell[test[i][0]] && player == cell[test[i][1]] && player == cell[test[i][2]]) {
                     console.log('winner', player, test[i]);
-                    winner = true;
                     gameover = true;
+                    winner = true;
                     break;
                 }
             }
@@ -143,9 +142,9 @@
                     document.getElementById("info").innerHTML = "Press F5 to try again!";
                     gameover = true;
                 } else {
-                    document.getElementById("player").innerHTML = "Waiting for Player " + ((player % 2) + 1) + "!";
+                    document.getElementById("player").innerHTML = "Waiting for Player " + ((cell[0] % 2) + 1) + "!";
                 }
-            }
+            }           
         }
 
     </script>
