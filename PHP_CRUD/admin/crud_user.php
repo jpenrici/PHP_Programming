@@ -48,7 +48,7 @@ function create_user($database, $username, $email, $password1, $password2)
     return !is_null($result);
 }
 
-function read_by_username($database, $username)
+function read_user_by_username($database, $username)
 {
     $result = null;
 
@@ -108,7 +108,7 @@ function update_user_by_id($database, $id, $username, $email, $password)
     if ($result) {
         $count = $result->rowCount();
         if ($count != 1) {
-            // echo "Found " . $count . " entries for " . $username . "!" . PHP_EOL;
+            // echo "Found " . $count . " entries for " . $id . "!" . PHP_EOL;
             return false;
         }
 
@@ -133,65 +133,12 @@ function update_user_by_id($database, $id, $username, $email, $password)
 
 function delete_user_by_id($database, $id)
 {
-    $result = null;
-
-    // Check entries
-    if (is_null($database)) {
-        return false;
-    }
-
-    if (is_null($id)) {
-        return false;
-    }
-
-    if (empty($id)) {
-        return false;
-    }
-
-    // Connect
-    $pdo = connect($database['hostname'], $database['dbname'], $database['user'], $database['password']);
-
-    // Find
-    $sql = "SELECT * FROM `user` WHERE `id` = '" . $id . "';";
-    $result = command($pdo, $sql);
-    if ($result) {
-        $count = $result->rowCount();
-        if ($count != 1) {
-            // echo "Found " . $count . " entries for " . $username . "!" . PHP_EOL;
-            return false;
-        }
-
-        // Delete
-        $sql = "DELETE FROM `user` WHERE `user`.`id` = " . $id . ";";
-        $result = command($pdo, $sql);
-    }
-
-    // Exit
-    $pdo = null;
-
-    return !is_null($result);
+    return delete_by_id($database['hostname'], $database['dbname'], $database['user'], $database['password'], 'user', $id);
 }
 
 function list_all_users($database)
 {
-    $result = null;
-
-    // Check entries
-    if (is_null($database)) {
-        return null;
-    }
-
-    // Connect
-    $pdo = connect($database['hostname'], $database['dbname'], $database['user'], $database['password']);
-
-    // Find All
-    $sql = "SELECT * FROM `user`;";
-    $result = command($pdo, $sql);
-
-    // Exit
-    $pdo = null;
-
-    return $result;
+    return list_all_itens($database['hostname'], $database['dbname'], $database['user'], $database['password'], 'user');
 }
 
 // crud_user.php
