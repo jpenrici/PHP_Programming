@@ -36,16 +36,27 @@ function command($pdo, $sql)
     return null;
 }
 
+function is_null_or_empty($data)
+{
+    // Test does not observe complex objects.
+    if (is_array($data)) {
+        foreach ($data as $value) {
+            if (is_null($value) || empty($value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    return (is_null($data) || empty($data));
+}
+
 function list_all_itens($hostname, $dbname, $user, $password, $table)
 {
     $result = null;
 
     // Check entries
-    if (is_null($hostname) || is_null($dbname) || is_null($user) || is_null($password) || is_null($table)) {
-        return null;
-    }
-
-    if (empty($table)) {
+    if (is_null_or_empty([$hostname, $dbname, $user, $password, $table])) {
         return null;
     }
 
@@ -67,15 +78,7 @@ function delete_by_id($hostname, $dbname, $user, $password, $table, $id)
     $result = null;
 
     // Check entries
-    if (is_null($hostname) || is_null($dbname) || is_null($user) || is_null($password) || is_null($table) || is_null($id)) {
-        return null;
-    }
-
-    if (empty($table)) {
-        return null;
-    }
-    
-    if (empty($id)) {
+    if (is_null_or_empty([$hostname, $dbname, $user, $password, $table, $id])) {
         return false;
     }
 
@@ -83,7 +86,7 @@ function delete_by_id($hostname, $dbname, $user, $password, $table, $id)
     $pdo = connect($hostname, $dbname, $user, $password);
 
     // Find
-    $sql = "SELECT * FROM `" . $table . "` WHERE `id` = '" . $id . "';";
+    $sql = "SELECT `id` FROM `" . $table . "` WHERE `id` = '" . $id . "';";
     $result = command($pdo, $sql);
     if ($result) {
         $count = $result->rowCount();
@@ -100,7 +103,33 @@ function delete_by_id($hostname, $dbname, $user, $password, $table, $id)
     // Exit
     $pdo = null;
 
-    return !is_null($result);    
+    return !is_null($result);
+}
+
+function find_by_id($pdo, $table, $id)
+{
+    $result = null;
+
+    // Check entries
+    if (is_null($pdo)) {
+        return null;
+    }
+
+    if (is_null_or_empty([$table, $id])) {
+        return null;
+    }
+
+    $sql = "SELECT * FROM `" . $table . "` WHERE `id` = '" . $id . "';";
+    $result = command($pdo, $sql);
+    if ($result) {
+        $count = $result->rowCount();
+        if ($count != 1) {
+            // echo "Found in " . $table . ", " . $count . " entries for " . $id . "!" . PHP_EOL;
+            return null;
+        }
+    }
+
+    return $result;
 }
 
 // db_functions.php

@@ -7,15 +7,11 @@ function create_product($database, $name, $description, $price, $discount, $quan
     $result = null;
 
     // Check entries
-    if (is_null($database)) {
+    if (is_null_or_empty($database)) {
         return false;
     }
 
-    if (is_null($name)) {
-        return false;
-    }
-
-    if (empty($name)) {
+    if (is_null_or_empty($name)) {
         return false;
     }
 
@@ -57,15 +53,11 @@ function read_product_by_name($database, $name)
     $result = null;
 
     // Check entries
-    if (is_null($database)) {
+    if (is_null_or_empty($database)) {
         return null;
     }
 
-    if (is_null($name)) {
-        return null;
-    }
-
-    if (empty($name)) {
+    if (is_null_or_empty($name)) {
         return null;
     }
 
@@ -75,10 +67,6 @@ function read_product_by_name($database, $name)
     // Find
     $sql = "SELECT * FROM `product` WHERE `name` = '" . $name . "';";
     $result = command($pdo, $sql);
-    // if ($result) {
-    //     $count = $result->rowCount();
-    //     echo "Found " . $count . " entries for " . $name . "!" . PHP_EOL;
-    // }
 
     // Exit
     $pdo = null;
@@ -91,15 +79,11 @@ function update_product_by_id($database, $id, $name, $description, $price, $disc
     $result = null;
 
     // Check entries
-    if (is_null($database)) {
+    if (is_null_or_empty($database)) {
         return false;
     }
 
-    if (is_null($id)) {
-        return false;
-    }
-
-    if (empty($id)) {
+    if (is_null_or_empty($id)) {
         return false;
     }
 
@@ -113,18 +97,11 @@ function update_product_by_id($database, $id, $name, $description, $price, $disc
     $pdo = connect($database['hostname'], $database['dbname'], $database['user'], $database['password']);
 
     // Find
-    $sql = "SELECT * FROM `product` WHERE `id` = '" . $id . "';";
-    $result = command($pdo, $sql);
+    $result = find_by_id($pdo, 'product', $id);
     if ($result) {
-        $count = $result->rowCount();
-        if ($count != 1) {
-            // echo "Found " . $count . " entries for " . $id . "!" . PHP_EOL;
-            return false;
-        }
-
         // Update
         $data = $result->fetch(PDO::FETCH_ASSOC);
-        $new_name = (empty($name) || is_null($name)) ? $data['username'] : $name;
+        $new_name = (empty($name) || is_null($name)) ? $data['name'] : $name;
         $new_description = (empty($description) || is_null($description)) ? $data['description'] : $description;
         $new_price = (empty($price) || is_null($price)) ? $data['price'] : $price;
         $new_discount = (empty($discount) || is_null($discount)) ? $data['discount'] : $discount;
@@ -147,6 +124,11 @@ function update_product_by_id($database, $id, $name, $description, $price, $disc
     return !is_null($result);
 }
 
+function update_product_quantity_by_id($database, $id, $quantity)
+{
+    return update_product_by_id($database, $id, "", "", "", "", $quantity, "", "");
+}
+
 function delete_product_by_id($database, $id)
 {
     return delete_by_id($database['hostname'], $database['dbname'], $database['user'], $database['password'], 'product', $id);
@@ -155,6 +137,46 @@ function delete_product_by_id($database, $id)
 function list_all_products($database)
 {
     return list_all_itens($database['hostname'], $database['dbname'], $database['user'], $database['password'], 'product');
+}
+
+function current_quantity($pdo, $id, $quantity)
+{
+    // Check entries
+    if (is_null($pdo)) {
+        return 0;
+    }
+
+    if (is_null_or_empty([$id, $quantity])) {
+        return 0;
+    }
+
+    if (!is_numeric($quantity)) {
+        return 0;
+    }
+
+    if ((int)$quantity < 1) {
+        return 0;
+    }
+
+    $result = find_by_id($pdo, 'product', $id);
+    if ($result) {
+        $count = $result->rowCount();
+        if ($count != 1) {
+            echo "Found " . $count . " entries for " . $id . "!" . PHP_EOL;
+            return 0;
+        }
+    }
+
+    $data = $result->fetch(PDO::FETCH_ASSOC);
+    $free = (int)$data['quantity'] - (int)$quantity;
+    if ($free < 1) {
+        echo "Quantity requested: " . $quantity . PHP_EOL;
+        echo "Quantity in stock : " . $data['quantity'] . PHP_EOL;
+        echo "Quantity of product id " . $id . " insufficient to reserve purchase." . PHP_EOL;
+        return 0;
+    }
+
+    return $free;
 }
 
 // crud_user.php

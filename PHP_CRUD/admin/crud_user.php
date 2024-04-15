@@ -7,15 +7,11 @@ function create_user($database, $username, $email, $password1, $password2)
     $result = null;
 
     // Check entries
-    if (is_null($database)) {
+    if (is_null_or_empty($database)) {
         return false;
     }
 
-    if (is_null($username) || is_null($email) || is_null($password1) || is_null($password2)) {
-        return false;
-    }
-
-    if (empty($username) || empty($email) || empty($password1) || empty($password2)) {
+    if (is_null_or_empty([$username, $email, $password1, $password2])) {
         return false;
     }
 
@@ -53,15 +49,11 @@ function read_user_by_username($database, $username)
     $result = null;
 
     // Check entries
-    if (is_null($database)) {
+    if (is_null_or_empty($database)) {
         return null;
     }
 
-    if (is_null($username)) {
-        return null;
-    }
-
-    if (empty($username)) {
+    if (is_null_or_empty($username)) {
         return null;
     }
 
@@ -71,10 +63,6 @@ function read_user_by_username($database, $username)
     // Find
     $sql = "SELECT * FROM `user` WHERE BINARY `username` = '" . $username . "';";
     $result = command($pdo, $sql);
-    // if ($result) {
-    //     $count = $result->rowCount();
-    //     echo "Found " . $count . " entries for " . $username . "!" . PHP_EOL;
-    // }
 
     // Exit
     $pdo = null;
@@ -87,15 +75,11 @@ function update_user_by_id($database, $id, $username, $email, $password)
     $result = null;
 
     // Check entries
-    if (is_null($database)) {
+    if (is_null_or_empty($database)) {
         return false;
     }
 
-    if (is_null($id)) {
-        return false;
-    }
-
-    if (empty($id)) {
+    if (is_null_or_empty($id)) {
         return false;
     }
 
@@ -103,15 +87,8 @@ function update_user_by_id($database, $id, $username, $email, $password)
     $pdo = connect($database['hostname'], $database['dbname'], $database['user'], $database['password']);
 
     // Find
-    $sql = "SELECT * FROM `user` WHERE `id` = '" . $id . "';";
-    $result = command($pdo, $sql);
+    $result = find_by_id($pdo, 'user', $id);
     if ($result) {
-        $count = $result->rowCount();
-        if ($count != 1) {
-            // echo "Found " . $count . " entries for " . $id . "!" . PHP_EOL;
-            return false;
-        }
-
         // Update
         $data = $result->fetch(PDO::FETCH_ASSOC);
         $new_username = (empty($username) || is_null($username)) ? $data['username'] : $username;
