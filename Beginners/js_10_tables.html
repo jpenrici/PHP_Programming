@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javasript</title>
+</head>
+
+<body>
+    <h2>JS : Workspace</h2>
+    <hr>
+    <div>
+        <table id="Table" style="margin: 5px auto;">
+        </table>
+    </div>
+</body>
+
+<!-- JavaScript -->
+<script>
+
+    function tr(value) {
+        return "<tr>\n" + value + "</tr>\n";
+    }
+
+    function td(value) {
+        return "<td>" + value + "</td>\n";
+    }
+
+    function table(rows, cols, value) {
+        let result = "";
+        for (let r = 0; r < rows; r++) {
+            let line = "";
+            for (let c = 0; c < cols; c++) {
+                line += td(value);
+            }
+            result += tr(line);
+        }
+        return result;
+    }
+
+    // Test
+    document.getElementById("Table").innerHTML = table(5, 5, "o");
+
+</script>
+
+</html>
