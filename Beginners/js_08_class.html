@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Javasript</title>
+</head>
+
+<body>
+  <h2>JS : Workspace</h2>
+  <hr />
+
+  <p id="response"></p>
+
+  <script>
+    class Person {
+      constructor(name, dayOfBirth, monthOfBirth, yearOfBirth) {
+        this.name = name;
+        this.dayOfBirth = dayOfBirth;
+        this.monthOfBirth = monthOfBirth;
+        this.yearOfBirth = yearOfBirth;
+      }
+
+      age() {
+        const date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let result = year - this.yearOfBirth;
+        if (month > this.monthOfBirth) {
+          return result;
+        }
+        if (month == this.monthOfBirth) {
+          if (day >= this.dayOfBirth) {
+            return result;
+          }
+        };
+        return result - 1;
+      }
+    }
+
+    const p = new Person("Full name", 4, 7, 2002);
+    document.getElementById("response").innerHTML = p.name + ", " + p.age() + " years old.";
+
+  </script>
+</body>
+
+</html>
